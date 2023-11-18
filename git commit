@@ -1,0 +1,3 @@
+$ git commit -S -m "YOUR_COMMIT_MESSAGE"
+# Creates a signed commit
+4AEE18F83AFDEB23

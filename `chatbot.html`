@@ -1,0 +1,183 @@
+
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+  <title>私人聊天机器人</title>
+  <style>
+    .chatbox {
+      width: 300px;
+      height: 400px;
+      border: 1px solid #ccc;
+      padding: 10px;
+      overflow-y: scroll;
+    }
+    .user-message {
+      color: blue;
+    }
+    .bot-message {
+      color: green;
+    }
+    input[type="text"] {
+      width: 100%;
+      padding: 5px;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div id="chat" class="chatbox"></div>
+  <input id="user-input" type="text" placeholder="输入消息" autofocus="true" />
+  
+  <script>
+    // 创建聊天框架
+    function createChatFrame() {
+      const chatbox = document.getElementById('chat');
+      const userInput = document.getElementById('user-input');
+      userInput.addEventListener('keydown', handleUserInput);
+
+      function handleUserInput(event) {
+        if (event.key === 'Enter') {
+          const userMessage = userInput.value;
+          addMessage(userMessage, 'user-message');
+          processUserInput(userMessage);
+          userInput.value = '';
+        }
+      }
+
+      function processUserInput(userMessage) {
+        // 在这里处理用户输入并生成机器人回复
+        // 例如，可以使用自然语言处理技术或硬编码规则
+        // 将生成的机器人回复传递给 `addMessage()` 函数以在屏幕上显示
+        const botMessage = generateBotReply(userMessage);
+        addMessage(botMessage, 'bot-message');
+      }
+
+      function generateBotReply(userMessage) {
+        // 在这里编写生成机器人回复的代码
+        // 可以基于用户输入生成静态回复或调用后端API来获取动态回复
+        // 这里只是一个示例，你可以根据你的需求来定制
+        const staticReplies = {
+          '你好': '你好！',
+          '天气': '今天天气晴朗！',
+          '再见': '再见，期待下次和你聊天！'
+        };
+
+        return staticReplies[userMessage] || '抱歉，我不明白你的意思';
+      }
+
+      function addMessage(message, className) {
+        const messageElement = document.createElement('div');
+        messageElement.textContent = message;
+        messageElement.classList.add(className);
+        chatbox.appendChild(messageElement);
+        chatbox.scrollTop = chatbox.scrollHeight;
+      }
+    }
+
+    createChatFrame();
+  </script>
+</body>
+</html
+要将前端聊天机器人与后端服务器连接，可以通过使用AJAX（Asynchronous JavaScript and XML）或Fetch API来实现。这样，你就可以在前端发送异步请求并接收从后端返回的数据。
+
+下面是一个示例代码，展示了如何使用AJAX来将用户输入发送到后端服务器，并接收后端服务器返回的机器人回复：
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+  <title>私人聊天机器人</title>
+  <style>
+    .chatbox {
+      width: 300px;
+      height: 400px;
+      border: 1px solid #ccc;
+      padding: 10px;
+      overflow-y: scroll;
+    }
+    .user-message {
+      color: blue;
+    }
+    .bot-message {
+      color: green;
+    }
+    input[type="text"] {
+      width: 100%;
+      padding: 5px;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div id="chat" class="chatbox"></div>
+  <input id="user-input" type="text" placeholder="输入消息" autofocus="true" />
+  
+  <script>
+    // 创建聊天框架
+    function createChatFrame() {
+      const chatbox = document.getElementById('chat');
+      const userInput = document.getElementById('user-input');
+      userInput.addEventListener('keydown', handleUserInput);
+
+      function handleUserInput(event) {
+        if (event.key === 'Enter') {
+          const userMessage = userInput.value;
+          addMessage(userMessage, 'user-message');
+          processUserInput(userMessage);
+          userInput.value = '';
+        }
+      }
+
+      function processUserInput(userMessage) {
+        // 1174574546075004938
+        sendUserMessageToBackend(userMessage)
+          .then(botMessage => {
+            addMessage(botMessage, 'bot-message');
+          })
+          .catch(error => {
+            console.error('发送用户消息时出错：', error);
+            addMessage('抱歉，发送消息时出现了错误', 'bot-message');
+          });
+      }
+
+      function sendUserMessageToBackend(userMessage) {
+        return new Promise((resolve, reject) => {
+          const xhr = new XMLHttpRequest();
+          const endpointUrl = 'YOUR_BACKEND_ENDPOINT_URL';  // 替换为你的后端服务器的URL
+
+          xhr.open('POST', endpointUrl);
+          xhr.setRequestHeader('Content-Type', 'application/json');
+
+          xhr.onload = function() {
+            if (xhr.status === 200) {
+              const response = JSON.parse(xhr.responseText);
+              resolve(response.botMessage);
+            } else {
+              reject('无法从后端服务器获取响应');
+            }
+          };
+
+          xhr.onerror = function() {
+            reject('请求发送失败');
+          };
+
+          const requestBody = JSON.stringify({ userMessage });
+          xhr.send(requestBody);
+        });
+      }
+
+      function addMessage(message, className) {
+        const messageElement = document.createElement('div');
+        messageElement.textContent = message;
+        messageElement.classList.add(className);
+        chatbox.appendChild(messageElement);
+        chatbox.scrollTop = chatbox.scrollHeight;
+      }
+    }
+    
+    createChatFrame();
+  </script>
+
+

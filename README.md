@@ -12,3 +12,4 @@ It seems like you're looking for assistance with the config files for your GitHu
 10. Wait for the repository owner to review and merge your pull request.
 
 Remember to regularly update your forked repository with the changes made to the original repository by using `git pull origin master` before making further contributions.
+

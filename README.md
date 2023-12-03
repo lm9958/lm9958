@@ -1,4 +1,4 @@
-It seems like you're looking for assistance with the config files for your GitHub profile. To contribute to the lm9958/lm9958 repository, follow these steps:
+git clone https://github.com/your-username/lm9958.gitIt seems like you're looking for assistance with the config files for your GitHub profile. To contribute to the lm9958/lm9958 repository, follow these steps:
 
 1. Create an account on GitHub if you haven't already.
 2. Visit the lm9958/lm9958 repository on GitHub.
